@@ -86,6 +86,7 @@ function FeaturedVideo() {
   const [muted, setMuted] = useState(true);
   const [paused, setPaused] = useState(false);
   const [nativeControls, setNativeControls] = useState(false);
+  const [mobileChromeVisible, setMobileChromeVisible] = useState(true);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -137,14 +138,20 @@ function FeaturedVideo() {
         poster="/media/thumbnails/showreel-03.jpg"
         aria-label="Zack video editing and motion showreel"
         onPlay={() => setPaused(false)}
-        onPause={() => setPaused(true)}
+        onPause={() => {
+          setPaused(true);
+          setMobileChromeVisible(true);
+        }}
         onVolumeChange={(event) => setMuted(event.currentTarget.muted)}
+        onClick={() => {
+          if (nativeControls) setMobileChromeVisible((visible) => !visible);
+        }}
       >
         <source src="/media/zack-showreel.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/15" />
-      <button onClick={openFullscreen} className="absolute right-3 top-3 inline-flex h-10 items-center gap-2 rounded-full border border-white/18 bg-black/75 px-3 text-[9px] font-semibold uppercase tracking-[.1em] text-white backdrop-blur-md sm:hidden" aria-label="View showreel in wide screen">
+      <div className={`pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/15 transition-opacity ${mobileChromeVisible ? "opacity-100" : "opacity-0 sm:opacity-100"}`} />
+      <button onClick={openFullscreen} className={`absolute right-3 top-3 inline-flex h-10 items-center gap-2 rounded-full border border-white/18 bg-black/75 px-3 text-[9px] font-semibold uppercase tracking-[.1em] text-white backdrop-blur-md transition-opacity sm:hidden ${mobileChromeVisible ? "opacity-100" : "invisible pointer-events-none opacity-0"}`} aria-label="View showreel in wide screen">
         <Maximize2 className="size-3.5" /> Wide screen
       </button>
       <div className="absolute inset-x-0 bottom-0 hidden items-end justify-between gap-3 p-3 sm:flex md:p-6">
@@ -174,7 +181,14 @@ function FeaturedVideo() {
 export function MotionShowcase() {
   const [active, setActive] = useState<MotionProject | null>(null);
   const [widePlayer, setWidePlayer] = useState(false);
+  const [projectChromeVisible, setProjectChromeVisible] = useState(true);
   const playerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!active || !projectChromeVisible) return;
+    const autoHideChrome = window.setTimeout(() => setProjectChromeVisible(false), 3000);
+    return () => window.clearTimeout(autoHideChrome);
+  }, [active, projectChromeVisible]);
 
   const openProjectFullscreen = () => {
     setWidePlayer(true);
@@ -184,6 +198,7 @@ export function MotionShowcase() {
   const closeProject = () => {
     setActive(null);
     setWidePlayer(false);
+    setProjectChromeVisible(true);
   };
 
   return (
@@ -204,7 +219,7 @@ export function MotionShowcase() {
       <div className="relative z-10 mx-auto mt-12 max-w-[1500px] px-5 pb-20 md:-mt-32 md:px-9 md:pb-24">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {motionProjects.slice(1).map((project, index) => (
-            <button key={project.id} onClick={() => setActive(project)} className="group relative overflow-hidden rounded-xl border border-white/10 bg-[#0d0d0e] p-0 text-left transition hover:border-[#ff3439]/55">
+            <button key={project.id} onClick={() => { setActive(project); setProjectChromeVisible(true); }} className="group relative overflow-hidden rounded-xl border border-white/10 bg-[#0d0d0e] p-0 text-left transition hover:border-[#ff3439]/55">
               <div className="relative aspect-video overflow-hidden bg-[radial-gradient(circle_at_50%_50%,rgba(255,38,44,.18),transparent_46%),#080808]">
                 <Image src={project.thumbnail} alt={`${project.title} video thumbnail`} fill className="object-cover transition duration-500 group-hover:scale-[1.04]" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-black/10" />
@@ -228,7 +243,7 @@ export function MotionShowcase() {
         {active && (
           <motion.div className={`fixed inset-0 z-[80] grid place-items-center bg-black/92 backdrop-blur-xl ${widePlayer ? "p-0" : "p-3 sm:p-4"}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={closeProject}>
             <motion.div className={`flex w-full max-w-6xl flex-col overflow-hidden border border-white/12 bg-[#090909] ${widePlayer ? "h-[100svh] rounded-none" : "max-h-[calc(100svh-1.5rem)] rounded-xl sm:rounded-2xl"}`} initial={{ scale: .94, y: 24 }} animate={{ scale: 1, y: 0 }} exit={{ scale: .96, y: 18 }} transition={{ type: "spring", damping: 24 }} onClick={(e) => e.stopPropagation()}>
-              <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-3 py-2.5 sm:px-5 sm:py-4"><div className="min-w-0"><p className="truncate text-[9px] uppercase tracking-[.16em] text-[#ff3439] sm:text-[10px] sm:tracking-[.18em]">{active.type}</p><h3 className="truncate text-sm font-semibold sm:text-base">{active.title}</h3></div><div className="ml-2 flex shrink-0 gap-1.5 sm:gap-2"><a href={`https://drive.google.com/file/d/${active.driveId}/view`} target="_blank" rel="noreferrer" className="grid size-10 place-items-center rounded-full border border-white/12 hover:bg-white/5" aria-label="Open video directly"><ExternalLink className="size-4" /></a><button onClick={openProjectFullscreen} className="inline-flex h-10 items-center gap-2 rounded-full border border-white/12 px-3 text-[9px] font-semibold uppercase tracking-[.08em] hover:bg-white/5" aria-label="View video in wide screen"><Maximize2 className="size-4" /><span className="hidden min-[360px]:inline">Wide screen</span></button><button onClick={closeProject} className="grid size-10 place-items-center rounded-full border border-white/12 hover:bg-white/5" aria-label="Close video"><X className="size-4" /></button></div></div>
+              <div className={`${projectChromeVisible ? "flex" : "hidden sm:flex"} shrink-0 items-center justify-between border-b border-white/10 px-3 py-2.5 sm:px-5 sm:py-4`}><div className="min-w-0"><p className="truncate text-[9px] uppercase tracking-[.16em] text-[#ff3439] sm:text-[10px] sm:tracking-[.18em]">{active.type}</p><h3 className="truncate text-sm font-semibold sm:text-base">{active.title}</h3></div><div className="ml-2 flex shrink-0 gap-1.5 sm:gap-2"><a href={`https://drive.google.com/file/d/${active.driveId}/view`} target="_blank" rel="noreferrer" className="grid size-10 place-items-center rounded-full border border-white/12 hover:bg-white/5" aria-label="Open video directly"><ExternalLink className="size-4" /></a><button onClick={openProjectFullscreen} className="inline-flex h-10 items-center gap-2 rounded-full border border-white/12 px-3 text-[9px] font-semibold uppercase tracking-[.08em] hover:bg-white/5" aria-label="View video in wide screen"><Maximize2 className="size-4" /><span className="hidden min-[360px]:inline">Wide screen</span></button><button onClick={closeProject} className="grid size-10 place-items-center rounded-full border border-white/12 hover:bg-white/5" aria-label="Close video"><X className="size-4" /></button></div></div>
               <div ref={playerRef} className={`${widePlayer ? "min-h-0 flex-1" : "aspect-video"} w-full bg-black fullscreen:h-screen fullscreen:w-screen fullscreen:aspect-auto`}><VideoFrame key={active.id} project={active} /></div>
             </motion.div>
           </motion.div>
