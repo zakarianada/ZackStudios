@@ -21,12 +21,12 @@ export const ContainerScroll = ({
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [16, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], isMobile ? [0.78, 0.94] : [1.045, 1]);
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const rotate = useTransform(scrollYProgress, [0, 1], isMobile ? [8, 0] : [16, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], isMobile ? [0.92, 1] : [1.045, 1]);
+  const translate = useTransform(scrollYProgress, [0, 1], isMobile ? [0, -40] : [0, -90]);
 
   return (
-    <div className="relative flex h-[54rem] items-center justify-center px-3 md:h-[72rem] md:px-16" ref={containerRef}>
+    <div className="relative flex h-[44rem] items-center justify-center px-3 md:h-[72rem] md:px-16" ref={containerRef}>
       <div className="relative w-full py-10 md:py-36" style={{ perspective: "1000px" }}>
         <Header translate={translate} titleComponent={titleComponent} />
         <Card rotate={rotate} translate={translate} scale={scale}>{children}</Card>
@@ -53,8 +53,8 @@ export const Card = ({
 }) => (
   <motion.div
     style={{ rotateX: rotate, scale, boxShadow: "0 10px 60px rgba(0,0,0,.5), 0 50px 120px rgba(0,0,0,.36)" }}
-    className="mx-auto -mt-10 h-[27rem] w-full max-w-5xl rounded-[28px] border border-white/15 bg-[#111] p-2 shadow-2xl md:h-[38rem] md:p-4"
+    className="mx-auto mt-3 h-auto w-full max-w-5xl rounded-[18px] border border-white/15 bg-[#111] p-1.5 shadow-2xl md:-mt-10 md:h-[38rem] md:rounded-[28px] md:p-4"
   >
-    <div className="h-full w-full overflow-hidden rounded-[20px] border border-white/8 bg-black">{children}</div>
+    <div className="aspect-video h-auto w-full overflow-hidden rounded-[13px] border border-white/8 bg-black md:aspect-auto md:h-full md:rounded-[20px]">{children}</div>
   </motion.div>
 );
