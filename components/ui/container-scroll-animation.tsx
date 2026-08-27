@@ -21,13 +21,13 @@ export const ContainerScroll = ({
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const rotate = useTransform(scrollYProgress, [0, 1], isMobile ? [8, 0] : [16, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], isMobile ? [0.92, 1] : [1.045, 1]);
-  const translate = useTransform(scrollYProgress, [0, 1], isMobile ? [0, -40] : [0, -90]);
+  const rotate = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [16, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [1.045, 1]);
+  const translate = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, -90]);
 
   return (
-    <div className="relative flex h-[44rem] items-center justify-center px-3 md:h-[72rem] md:px-16" ref={containerRef}>
-      <div className="relative w-full py-10 md:py-36" style={{ perspective: "1000px" }}>
+    <div className="relative flex h-auto items-center justify-center px-5 py-16 md:h-[72rem] md:px-16 md:py-0" ref={containerRef}>
+      <div className="relative w-full md:py-36" style={{ perspective: "1000px" }}>
         <Header translate={translate} titleComponent={titleComponent} />
         <Card rotate={rotate} translate={translate} scale={scale}>{children}</Card>
       </div>

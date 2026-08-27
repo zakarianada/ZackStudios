@@ -1,24 +1,83 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Maximize2, Pause, Play, Volume2, VolumeX, X } from "lucide-react";
+import { ExternalLink, LoaderCircle, Maximize2, Pause, Play, Volume2, VolumeX, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { drivePreviewUrl, motionProjects, type MotionProject } from "@/lib/motion";
 
 function VideoFrame({ project, className = "" }: { project: MotionProject; className?: string }) {
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const loadingFallback = window.setTimeout(() => setLoaded(true), 8000);
+    return () => window.clearTimeout(loadingFallback);
+  }, [project.driveId]);
+
   return (
-    <iframe
-      title={project.title}
-      src={drivePreviewUrl(project.driveId)}
-      className={`h-full w-full border-0 ${className}`}
-      allow="autoplay; encrypted-media; picture-in-picture"
-      allowFullScreen
-      sandbox="allow-scripts allow-same-origin allow-presentation"
-      referrerPolicy="no-referrer"
-    />
+    <div className={`relative size-full ${className}`}>
+      {!loaded && (
+        <div className="pointer-events-none absolute inset-0 z-10 grid place-items-center bg-black" role="status">
+          <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[.14em] text-white/60">
+            <LoaderCircle className="size-4 animate-spin text-[#ff3439]" /> Loading video
+          </div>
+        </div>
+      )}
+      <iframe
+        title={project.title}
+        src={drivePreviewUrl(project.driveId)}
+        className="size-full border-0"
+        allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+        allowFullScreen
+        loading="eager"
+        onLoad={() => setLoaded(true)}
+        onError={() => setLoaded(true)}
+      />
+    </div>
   );
+}
+
+type WebkitFullscreenElement = HTMLElement & {
+  webkitRequestFullscreen?: () => Promise<void> | void;
+};
+
+type WebkitFullscreenVideo = HTMLVideoElement & {
+  webkitEnterFullscreen?: () => void;
+};
+
+async function enterLandscapeFullscreen(element: HTMLElement | null, fallbackVideo?: HTMLVideoElement | null) {
+  if (!element) return;
+
+  let enteredFullscreen = false;
+  try {
+    if (element.requestFullscreen) {
+      await element.requestFullscreen();
+      enteredFullscreen = true;
+    } else {
+      const webkitElement = element as WebkitFullscreenElement;
+      if (webkitElement.webkitRequestFullscreen) {
+        await webkitElement.webkitRequestFullscreen();
+        enteredFullscreen = true;
+      }
+    }
+  } catch {
+    // The native iOS video fullscreen fallback below is more reliable on iPhones.
+  }
+
+  if (!enteredFullscreen && fallbackVideo) {
+    (fallbackVideo as WebkitFullscreenVideo).webkitEnterFullscreen?.();
+    return;
+  }
+
+  const orientation = screen.orientation as ScreenOrientation & {
+    lock?: (orientation: "landscape") => Promise<void>;
+  };
+  try {
+    await orientation.lock?.("landscape");
+  } catch {
+    // Some mobile browsers require the user to rotate after entering fullscreen.
+  }
 }
 
 function FeaturedVideo() {
@@ -26,11 +85,20 @@ function FeaturedVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
   const [paused, setPaused] = useState(false);
+  const [nativeControls, setNativeControls] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     video.play().catch(() => setPaused(true));
+  }, []);
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
+    const updateControls = () => setNativeControls(mobileQuery.matches);
+    updateControls();
+    mobileQuery.addEventListener("change", updateControls);
+    return () => mobileQuery.removeEventListener("change", updateControls);
   }, []);
 
   const togglePlayback = () => {
@@ -52,13 +120,7 @@ function FeaturedVideo() {
   };
 
   const openFullscreen = () => {
-    if (containerRef.current?.requestFullscreen) {
-      void containerRef.current.requestFullscreen();
-      return;
-    }
-
-    const video = videoRef.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
-    video?.webkitEnterFullscreen?.();
+    void enterLandscapeFullscreen(containerRef.current, videoRef.current);
   };
 
   return (
@@ -70,7 +132,9 @@ function FeaturedVideo() {
         muted
         loop
         playsInline
+        controls={nativeControls}
         preload="metadata"
+        poster="/media/thumbnails/showreel-03.jpg"
         aria-label="Zack video editing and motion showreel"
         onPlay={() => setPaused(false)}
         onPause={() => setPaused(true)}
@@ -80,7 +144,10 @@ function FeaturedVideo() {
         Your browser does not support the video tag.
       </video>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/15" />
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-3 sm:gap-3 md:p-6">
+      <button onClick={openFullscreen} className="absolute right-3 top-3 inline-flex h-10 items-center gap-2 rounded-full border border-white/18 bg-black/75 px-3 text-[9px] font-semibold uppercase tracking-[.1em] text-white backdrop-blur-md sm:hidden" aria-label="View showreel in wide screen">
+        <Maximize2 className="size-3.5" /> Wide screen
+      </button>
+      <div className="absolute inset-x-0 bottom-0 hidden items-end justify-between gap-3 p-3 sm:flex md:p-6">
         <div className="pointer-events-none">
           <p className="text-[9px] font-semibold uppercase tracking-[.2em] text-[#ff3439]">Featured showreel</p>
           <p className="mt-1 hidden text-xs text-white/60 sm:block">Autoplaying silently</p>
@@ -106,10 +173,17 @@ function FeaturedVideo() {
 
 export function MotionShowcase() {
   const [active, setActive] = useState<MotionProject | null>(null);
+  const [widePlayer, setWidePlayer] = useState(false);
   const playerRef = useRef<HTMLDivElement>(null);
 
   const openProjectFullscreen = () => {
-    void playerRef.current?.requestFullscreen();
+    setWidePlayer(true);
+    void enterLandscapeFullscreen(playerRef.current);
+  };
+
+  const closeProject = () => {
+    setActive(null);
+    setWidePlayer(false);
   };
 
   return (
@@ -119,7 +193,7 @@ export function MotionShowcase() {
         titleComponent={
           <div className="relative z-10 px-5">
             <p className="text-[10px] font-semibold uppercase tracking-[.22em] text-[#ff3439]">01 / Video Editing &amp; Motion</p>
-            <h2 className="display-font mt-4 text-[clamp(3.8rem,8vw,7.2rem)] font-black uppercase leading-[.84]">Cut for <span className="text-[#ff3439]">impact.</span></h2>
+            <h2 className="display-font mt-4 text-[clamp(3rem,16vw,3.8rem)] font-black uppercase leading-[.84] sm:text-[clamp(3.8rem,8vw,7.2rem)]">Cut for <span className="text-[#ff3439]">impact.</span></h2>
             <p className="mx-auto mt-5 max-w-xl text-sm leading-6 text-white/52">Showreels, commercial edits, social campaigns, lifestyle, travel and property films — paced to hold attention and built for the screen they live on.</p>
           </div>
         }
@@ -127,7 +201,7 @@ export function MotionShowcase() {
         <FeaturedVideo />
       </ContainerScroll>
 
-      <div className="relative z-10 mx-auto -mt-32 max-w-[1500px] px-5 pb-24 md:px-9">
+      <div className="relative z-10 mx-auto mt-12 max-w-[1500px] px-5 pb-20 md:-mt-32 md:px-9 md:pb-24">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {motionProjects.slice(1).map((project, index) => (
             <button key={project.id} onClick={() => setActive(project)} className="group relative overflow-hidden rounded-xl border border-white/10 bg-[#0d0d0e] p-0 text-left transition hover:border-[#ff3439]/55">
@@ -152,10 +226,10 @@ export function MotionShowcase() {
 
       <AnimatePresence>
         {active && (
-          <motion.div className="fixed inset-0 z-[80] grid place-items-center bg-black/92 p-4 backdrop-blur-xl" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActive(null)}>
-            <motion.div className="w-full max-w-6xl overflow-hidden rounded-2xl border border-white/12 bg-[#090909]" initial={{ scale: .94, y: 24 }} animate={{ scale: 1, y: 0 }} exit={{ scale: .96, y: 18 }} transition={{ type: "spring", damping: 24 }} onClick={(e) => e.stopPropagation()}>
-              <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 sm:px-5 sm:py-4"><div className="min-w-0"><p className="truncate text-[10px] uppercase tracking-[.18em] text-[#ff3439]">{active.type}</p><h3 className="truncate font-semibold">{active.title}</h3></div><div className="ml-3 flex shrink-0 gap-2"><button onClick={openProjectFullscreen} className="inline-flex h-10 items-center gap-2 rounded-full border border-white/12 px-3 text-[9px] font-semibold uppercase tracking-[.1em] hover:bg-white/5" aria-label="View video fullscreen"><Maximize2 className="size-4" /><span className="hidden sm:inline">Fullscreen</span></button><button onClick={() => setActive(null)} className="grid size-10 place-items-center rounded-full border border-white/12 hover:bg-white/5" aria-label="Close video"><X className="size-4" /></button></div></div>
-              <div ref={playerRef} className="aspect-video bg-black fullscreen:h-screen fullscreen:w-screen fullscreen:aspect-auto"><VideoFrame project={active} /></div>
+          <motion.div className={`fixed inset-0 z-[80] grid place-items-center bg-black/92 backdrop-blur-xl ${widePlayer ? "p-0" : "p-3 sm:p-4"}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={closeProject}>
+            <motion.div className={`flex w-full max-w-6xl flex-col overflow-hidden border border-white/12 bg-[#090909] ${widePlayer ? "h-[100svh] rounded-none" : "max-h-[calc(100svh-1.5rem)] rounded-xl sm:rounded-2xl"}`} initial={{ scale: .94, y: 24 }} animate={{ scale: 1, y: 0 }} exit={{ scale: .96, y: 18 }} transition={{ type: "spring", damping: 24 }} onClick={(e) => e.stopPropagation()}>
+              <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-3 py-2.5 sm:px-5 sm:py-4"><div className="min-w-0"><p className="truncate text-[9px] uppercase tracking-[.16em] text-[#ff3439] sm:text-[10px] sm:tracking-[.18em]">{active.type}</p><h3 className="truncate text-sm font-semibold sm:text-base">{active.title}</h3></div><div className="ml-2 flex shrink-0 gap-1.5 sm:gap-2"><a href={`https://drive.google.com/file/d/${active.driveId}/view`} target="_blank" rel="noreferrer" className="grid size-10 place-items-center rounded-full border border-white/12 hover:bg-white/5" aria-label="Open video directly"><ExternalLink className="size-4" /></a><button onClick={openProjectFullscreen} className="inline-flex h-10 items-center gap-2 rounded-full border border-white/12 px-3 text-[9px] font-semibold uppercase tracking-[.08em] hover:bg-white/5" aria-label="View video in wide screen"><Maximize2 className="size-4" /><span className="hidden min-[360px]:inline">Wide screen</span></button><button onClick={closeProject} className="grid size-10 place-items-center rounded-full border border-white/12 hover:bg-white/5" aria-label="Close video"><X className="size-4" /></button></div></div>
+              <div ref={playerRef} className={`${widePlayer ? "min-h-0 flex-1" : "aspect-video"} w-full bg-black fullscreen:h-screen fullscreen:w-screen fullscreen:aspect-auto`}><VideoFrame key={active.id} project={active} /></div>
             </motion.div>
           </motion.div>
         )}
