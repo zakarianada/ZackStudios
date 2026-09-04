@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import type { Project } from "@/lib/portfolio";
+import { useDialog } from "@/lib/use-dialog";
 
 export function ProjectModal({
   project,
@@ -16,18 +17,15 @@ export function ProjectModal({
   onClose: () => void;
   onNavigate: (direction: -1 | 1) => void;
 }) {
+  const dialogRef = useDialog(Boolean(project), onClose);
   useEffect(() => {
     if (!project) return;
-    const old = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     const keydown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
       if (event.key === "ArrowLeft") onNavigate(-1);
       if (event.key === "ArrowRight") onNavigate(1);
     };
     window.addEventListener("keydown", keydown);
     return () => {
-      document.body.style.overflow = old;
       window.removeEventListener("keydown", keydown);
     };
   }, [project, onClose, onNavigate]);
@@ -37,6 +35,10 @@ export function ProjectModal({
       {project && (
         <motion.div className="fixed inset-0 z-[75] bg-black/94 backdrop-blur-xl" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
           <motion.div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-dialog-title"
             className="modal-scroll absolute inset-x-0 bottom-0 top-3 overflow-y-auto rounded-t-[26px] border border-white/12 bg-[#090909] shadow-[0_-30px_100px_rgba(0,0,0,.7)] md:inset-x-4 md:top-5 md:rounded-[28px]"
             initial={{ y: 80, scale: .98 }} animate={{ y: 0, scale: 1 }} exit={{ y: 70, scale: .985 }} transition={{ type: "spring", stiffness: 200, damping: 26 }}
             onClick={(event) => event.stopPropagation()}
@@ -54,17 +56,18 @@ export function ProjectModal({
               <div className="grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:items-end">
                 <div>
                   <p className="text-[10px] uppercase tracking-[.22em] text-[#ff3439]">Project / {project.year}</p>
-                  <h2 className="display-font mt-4 text-[clamp(4rem,9vw,8rem)] font-black uppercase leading-[.78]">{project.title}</h2>
+                  <h2 id="project-dialog-title" className="display-font mt-4 text-[clamp(4rem,9vw,8rem)] font-black uppercase leading-[.78]">{project.title}</h2>
+                  <p className="mt-7 text-[9px] font-semibold uppercase tracking-[.18em] text-white/40">The challenge</p>
                   <p className="mt-6 max-w-xl text-base leading-7 text-white/55">{project.summary}</p>
                   <div className="mt-7 flex flex-wrap gap-2">{project.services.map((service) => <span key={service} className="rounded-full border border-white/10 bg-white/[.03] px-3 py-2 text-[9px] uppercase tracking-[.12em] text-white/58">{service}</span>)}</div>
                 </div>
                 <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-black">
-                  <Image src={project.cover} alt={project.title} fill className="object-cover" sizes="(max-width:1024px) 100vw, 60vw" priority />
+                  <Image src={project.cover} alt={project.title} fill className={project.orientation === "portrait" ? "object-contain" : "object-cover"} sizes="(max-width:1024px) 100vw, 60vw" priority />
                 </div>
               </div>
 
               <div className="my-12 grid gap-6 border-y border-white/10 py-9 md:grid-cols-[.65fr_1.35fr]">
-                <div><p className="text-[10px] uppercase tracking-[.18em] text-[#ff3439]">Creative direction</p><h3 className="display-font mt-2 text-4xl font-black uppercase">The idea</h3></div>
+                <div><p className="text-[10px] uppercase tracking-[.18em] text-[#ff3439]">Creative direction</p><h3 className="display-font mt-2 text-4xl font-black uppercase">The approach</h3></div>
                 <p className="max-w-3xl text-base leading-8 text-white/58">{project.concept}</p>
               </div>
 
@@ -78,7 +81,7 @@ export function ProjectModal({
               </div>
 
               <div className="mt-10 flex flex-col justify-between gap-5 rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_80%_20%,rgba(255,38,44,.12),transparent_28rem),#0d0d0e] p-6 md:flex-row md:items-center md:p-9">
-                <div><p className="text-[10px] uppercase tracking-[.18em] text-[#ff3439]">Want the full project URL?</p><p className="mt-2 max-w-xl text-sm leading-6 text-white/50">Every modal also has a dedicated case-study route that can be shared directly with clients.</p></div>
+                <div><p className="text-[10px] uppercase tracking-[.18em] text-[#ff3439]">Continue exploring</p><button type="button" onClick={() => onNavigate(1)} className="mt-2 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-white/75">Next project <ArrowRight className="size-4" /></button></div>
                 <Link href={`/work/${project.slug}`} className="inline-flex items-center justify-center gap-3 rounded-sm bg-[#ff262c] px-5 py-3 text-xs font-semibold uppercase tracking-[.11em]">Open case study <ArrowUpRight className="size-4" /></Link>
               </div>
             </div>

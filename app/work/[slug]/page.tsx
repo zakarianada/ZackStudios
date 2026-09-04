@@ -41,7 +41,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <div className="mt-7 flex flex-wrap gap-2">{project.tags.map((tag) => <span key={tag} className="rounded-full border border-white/10 bg-white/[.025] px-3 py-2 text-[9px] uppercase tracking-[.12em] text-white/54">{tag}</span>)}</div>
           </div>
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b0c]">
-            <Image src={project.cover} alt={project.title} fill priority className="object-cover" sizes="(max-width:1024px) 100vw, 60vw" />
+            <Image src={project.cover} alt={project.title} fill priority className={project.orientation === "portrait" ? "object-contain" : "object-cover"} sizes="(max-width:1024px) 100vw, 60vw" />
           </div>
         </div>
 

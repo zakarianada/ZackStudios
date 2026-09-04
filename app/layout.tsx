@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { RightClickContact } from "@/components/right-click-contact";
+import { MotionPreferences } from "@/components/motion-preferences";
 
 export const metadata: Metadata = {
   title: "ZACK STUDIOS — Video Editing, Graphic Design, AI + Web",
@@ -17,8 +18,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        {children}
-        <RightClickContact />
+        <MotionPreferences>
+          {children}
+          <RightClickContact />
+        </MotionPreferences>
       </body>
     </html>
   );

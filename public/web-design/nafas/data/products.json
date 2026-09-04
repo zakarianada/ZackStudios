@@ -1,0 +1,544 @@
+[
+  {
+    "id": 1,
+    "sku": "NF-001",
+    "slug": "tadelakt-overshirt",
+    "name": "Tadelakt Overshirt",
+    "audience": "Men",
+    "category": "Shirts",
+    "price": 1290,
+    "currency": "MAD",
+    "color": "Sand",
+    "description": "A structured cotton-linen overshirt with a dry, mineral hand inspired by tadelakt walls.",
+    "fit": "Relaxed",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "S": 5,
+      "M": 7,
+      "L": 9,
+      "XL": 11
+    },
+    "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Tadelakt Overshirt — NAFAS Casablanca",
+    "badge": "NEW",
+    "material": "Cotton / Linen",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 2,
+    "sku": "NF-002",
+    "slug": "gueliz-pleated-trouser",
+    "name": "Gueliz Pleated Trouser",
+    "audience": "Women",
+    "category": "Trousers",
+    "price": 990,
+    "currency": "MAD",
+    "color": "Ink",
+    "description": "High-rise wide trouser with deep front pleats and a clean extended waistband.",
+    "fit": "Wide",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "stock": {
+      "XS": 8,
+      "S": 10,
+      "M": 12,
+      "L": 14
+    },
+    "image": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Gueliz Pleated Trouser — NAFAS Casablanca",
+    "badge": "NEW",
+    "material": "Cotton",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 3,
+    "sku": "NF-003",
+    "slug": "rif-knit-polo",
+    "name": "Rif Knit Polo",
+    "audience": "Men",
+    "category": "Knitwear",
+    "price": 890,
+    "currency": "MAD",
+    "color": "Oat",
+    "description": "Fine-gauge cotton knit polo with an open collar and dropped shoulder.",
+    "fit": "Relaxed",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "S": 11,
+      "M": 13,
+      "L": 15,
+      "XL": 6
+    },
+    "image": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Rif Knit Polo — NAFAS Casablanca",
+    "badge": "",
+    "material": "Cotton knit",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 4,
+    "sku": "NF-004",
+    "slug": "dune-column-dress",
+    "name": "Dune Column Dress",
+    "audience": "Women",
+    "category": "Dresses",
+    "price": 1490,
+    "currency": "MAD",
+    "color": "Clay",
+    "description": "Fluid ankle-length dress cut on the bias with a sculpted asymmetric neckline.",
+    "fit": "Slim",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "stock": {
+      "XS": 14,
+      "S": 5,
+      "M": 7,
+      "L": 9
+    },
+    "image": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Dune Column Dress — NAFAS Casablanca",
+    "badge": "NEW",
+    "material": "Viscose blend",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 5,
+    "sku": "NF-005",
+    "slug": "medina-utility-jacket",
+    "name": "Medina Utility Jacket",
+    "audience": "Unisex",
+    "category": "Outerwear",
+    "price": 1790,
+    "currency": "MAD",
+    "color": "Olive",
+    "description": "Unlined utility jacket in washed cotton twill with concealed pockets and matte hardware.",
+    "fit": "Boxy",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 6,
+      "S": 8,
+      "M": 10,
+      "L": 12,
+      "XL": 14
+    },
+    "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Medina Utility Jacket — NAFAS Casablanca",
+    "badge": "NEW",
+    "material": "Washed cotton",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 6,
+    "sku": "NF-006",
+    "slug": "essaouira-linen-shirt",
+    "name": "Essaouira Linen Shirt",
+    "audience": "Women",
+    "category": "Shirts",
+    "price": 790,
+    "currency": "MAD",
+    "color": "Bone",
+    "description": "Airy linen shirt with an elongated cuff and a slightly cropped back hem.",
+    "fit": "Relaxed",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "stock": {
+      "XS": 9,
+      "S": 11,
+      "M": 13,
+      "L": 15
+    },
+    "image": "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Essaouira Linen Shirt — NAFAS Casablanca",
+    "badge": "",
+    "material": "European linen",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 7,
+    "sku": "NF-007",
+    "slug": "atlas-wool-blazer",
+    "name": "Atlas Wool Blazer",
+    "audience": "Men",
+    "category": "Tailoring",
+    "price": 2290,
+    "currency": "MAD",
+    "color": "Charcoal",
+    "description": "Soft-constructed wool blazer with broad notch lapels and a half-lined interior.",
+    "fit": "Regular",
+    "sizes": [
+      "46",
+      "48",
+      "50",
+      "52",
+      "54"
+    ],
+    "stock": {
+      "46": 12,
+      "48": 14,
+      "50": 5,
+      "52": 7,
+      "54": 9
+    },
+    "image": "https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Atlas Wool Blazer — NAFAS Casablanca",
+    "badge": "LIMITED",
+    "material": "Wool",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 8,
+    "sku": "NF-008",
+    "slug": "safi-canvas-tote",
+    "name": "Safi Canvas Tote",
+    "audience": "Accessories",
+    "category": "Bags",
+    "price": 590,
+    "currency": "MAD",
+    "color": "Natural",
+    "description": "Heavy washed canvas tote with vegetable-tanned leather handles and internal zip pocket.",
+    "fit": "One size",
+    "sizes": [
+      "OS"
+    ],
+    "stock": {
+      "OS": 15
+    },
+    "image": "https://images.unsplash.com/photo-1566206091558-7f218b696731?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Safi Canvas Tote — NAFAS Casablanca",
+    "badge": "",
+    "material": "Cotton canvas / leather",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 9,
+    "sku": "NF-009",
+    "slug": "agafay-leather-sandal",
+    "name": "Agafay Leather Sandal",
+    "audience": "Accessories",
+    "category": "Shoes",
+    "price": 1090,
+    "currency": "MAD",
+    "color": "Espresso",
+    "description": "Minimal leather sandal with hand-finished straps and a low stacked sole.",
+    "fit": "Regular",
+    "sizes": [
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41",
+      "42",
+      "43"
+    ],
+    "stock": {
+      "36": 7,
+      "37": 9,
+      "38": 11,
+      "39": 13,
+      "40": 15,
+      "41": 6,
+      "42": 8,
+      "43": 10
+    },
+    "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Agafay Leather Sandal — NAFAS Casablanca",
+    "badge": "LIMITED",
+    "material": "Vegetable-tanned leather",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 10,
+    "sku": "NF-010",
+    "slug": "casablanca-trench",
+    "name": "Casablanca Trench",
+    "audience": "Women",
+    "category": "Outerwear",
+    "price": 2190,
+    "currency": "MAD",
+    "color": "Stone",
+    "description": "Fluid water-resistant trench with a detached storm flap and generous belt.",
+    "fit": "Oversized",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 12,
+      "M": 14,
+      "L": 5
+    },
+    "image": "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Casablanca Trench — NAFAS Casablanca",
+    "badge": "NEW",
+    "material": "Technical cotton",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 11,
+    "sku": "NF-011",
+    "slug": "bab-doukkala-shirt",
+    "name": "Bab Doukkala Shirt",
+    "audience": "Men",
+    "category": "Shirts",
+    "price": 850,
+    "currency": "MAD",
+    "color": "White",
+    "description": "Crisp poplin shirt with a concealed placket, wide cuff and subtle curved hem.",
+    "fit": "Regular",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "S": 13,
+      "M": 15,
+      "L": 6,
+      "XL": 8
+    },
+    "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Bab Doukkala Shirt — NAFAS Casablanca",
+    "badge": "",
+    "material": "Cotton poplin",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 12,
+    "sku": "NF-012",
+    "slug": "mogador-rib-tank",
+    "name": "Mogador Rib Tank",
+    "audience": "Women",
+    "category": "Tops",
+    "price": 490,
+    "currency": "MAD",
+    "color": "Black",
+    "description": "Compact rib tank in mercerized cotton with a square neckline.",
+    "fit": "Slim",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "stock": {
+      "XS": 5,
+      "S": 7,
+      "M": 9,
+      "L": 11
+    },
+    "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Mogador Rib Tank — NAFAS Casablanca",
+    "badge": "",
+    "material": "Mercerized cotton",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 13,
+    "sku": "NF-013",
+    "slug": "taroudant-wrap-skirt",
+    "name": "Taroudant Wrap Skirt",
+    "audience": "Women",
+    "category": "Skirts",
+    "price": 1050,
+    "currency": "MAD",
+    "color": "Saffron",
+    "description": "Long wrap skirt in garment-dyed cotton poplin with an internal tie system.",
+    "fit": "Regular",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "stock": {
+      "XS": 8,
+      "S": 10,
+      "M": 12,
+      "L": 14
+    },
+    "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Taroudant Wrap Skirt — NAFAS Casablanca",
+    "badge": "",
+    "material": "Cotton poplin",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 14,
+    "sku": "NF-014",
+    "slug": "anfa-zip-blouson",
+    "name": "Anfa Zip Blouson",
+    "audience": "Men",
+    "category": "Outerwear",
+    "price": 1690,
+    "currency": "MAD",
+    "color": "Graphite",
+    "description": "Minimal zip blouson in brushed cotton with a softly structured collar.",
+    "fit": "Boxy",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "S": 11,
+      "M": 13,
+      "L": 15,
+      "XL": 6
+    },
+    "image": "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Anfa Zip Blouson — NAFAS Casablanca",
+    "badge": "",
+    "material": "Brushed cotton",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 15,
+    "sku": "NF-015",
+    "slug": "fes-double-knee-pant",
+    "name": "Fes Double-Knee Pant",
+    "audience": "Unisex",
+    "category": "Trousers",
+    "price": 1190,
+    "currency": "MAD",
+    "color": "Tobacco",
+    "description": "Workwear-inspired pant in dense cotton canvas, refined with tonal stitching.",
+    "fit": "Straight",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 14,
+      "S": 5,
+      "M": 7,
+      "L": 9,
+      "XL": 11
+    },
+    "image": "https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Fes Double-Knee Pant — NAFAS Casablanca",
+    "badge": "",
+    "material": "Cotton canvas",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 16,
+    "sku": "NF-016",
+    "slug": "neroli-silk-scarf",
+    "name": "Neroli Silk Scarf",
+    "audience": "Accessories",
+    "category": "Scarves",
+    "price": 420,
+    "currency": "MAD",
+    "color": "Neroli",
+    "description": "Printed silk twill scarf featuring an abstract geometry derived from Moroccan courtyard shadows.",
+    "fit": "One size",
+    "sizes": [
+      "OS"
+    ],
+    "stock": {
+      "OS": 6
+    },
+    "image": "https://images.unsplash.com/photo-1536243298747-ea8874136d64?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Neroli Silk Scarf — NAFAS Casablanca",
+    "badge": "NEW",
+    "material": "Silk twill",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 17,
+    "sku": "NF-017",
+    "slug": "mellah-soft-cardigan",
+    "name": "Mellah Soft Cardigan",
+    "audience": "Women",
+    "category": "Knitwear",
+    "price": 1190,
+    "currency": "MAD",
+    "color": "Cocoa",
+    "description": "Brushed cotton-cashmere cardigan with dropped shoulders and shell buttons.",
+    "fit": "Relaxed",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "stock": {
+      "XS": 9,
+      "S": 11,
+      "M": 13,
+      "L": 15
+    },
+    "image": "https://images.unsplash.com/photo-1520975954732-35dd22299614?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Mellah Soft Cardigan — NAFAS Casablanca",
+    "badge": "LIMITED",
+    "material": "Cotton / cashmere",
+    "madeIn": "Morocco"
+  },
+  {
+    "id": 18,
+    "sku": "NF-018",
+    "slug": "ouarzazate-field-vest",
+    "name": "Ouarzazate Field Vest",
+    "audience": "Men",
+    "category": "Outerwear",
+    "price": 1390,
+    "currency": "MAD",
+    "color": "Khaki",
+    "description": "Lightweight field vest with modular pockets, tonal snaps and a mesh inner yoke.",
+    "fit": "Regular",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "S": 12,
+      "M": 14,
+      "L": 5,
+      "XL": 7
+    },
+    "image": "https://images.unsplash.com/photo-1560243563-062bfc001d68?auto=format&fit=crop&w=1400&q=85",
+    "imageAlt": "Ouarzazate Field Vest — NAFAS Casablanca",
+    "badge": "",
+    "material": "Technical cotton",
+    "madeIn": "Morocco"
+  }
+]

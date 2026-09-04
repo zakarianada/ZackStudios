@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ece7df" />
+  <meta name="description" content="NAFAS Casablanca — contemporary Moroccan fashion, made slowly and worn often." />
+  <title>NAFAS — Casablanca</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__brand">NAFAS</div>
+    <div class="loader__line"><span></span></div>
+    <div class="loader__meta">CASABLANCA / 2026</div>
+  </div>
+
+  <header class="site-header" id="header">
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span></button>
+    <a class="logo" href="#top" aria-label="NAFAS home"><span>NAFAS</span><small>CASABLANCA</small></a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="#shop" data-audience="all">SHOP</a>
+      <a href="#shop" data-audience="Women">WOMEN</a>
+      <a href="#shop" data-audience="Men">MEN</a>
+      <a href="#story">JOURNAL</a>
+    </nav>
+    <div class="header-actions">
+      <label class="language-control language-control--desktop" aria-label="Language"><select class="language-select" data-language-select><option value="en">ENGLISH</option><option value="fr">FRANÇAIS</option><option value="it">ITALIANO</option><option value="de">DEUTSCH</option><option value="nl">NEDERLANDS</option><option value="es">ESPAÑOL</option><option value="ar">العربية</option></select></label>
+      <button class="text-btn" id="searchBtn">SEARCH</button>
+      <button class="text-btn" id="trackBtn">TRACK</button>
+      <button class="text-btn cart-trigger" id="cartBtn">BAG <span id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__inner">
+      <button class="close-x" id="closeMenu" aria-label="Close menu">×</button>
+      <div class="mobile-menu__count">01 — 06</div>
+      <a href="#shop" data-mobile-filter="all">Shop all</a>
+      <a href="#shop" data-mobile-filter="Women">Women</a>
+      <a href="#shop" data-mobile-filter="Men">Men</a>
+      <a href="#shop" data-mobile-filter="Unisex">Unisex</a>
+      <a href="#shop" data-mobile-filter="Accessories">Objects</a>
+      <a href="#story">Journal</a>
+      <div class="mobile-menu__footer"><span>Casablanca, Morocco</span><label class="language-control language-control--mobile" aria-label="Language"><select class="language-select" data-language-select><option value="en">ENGLISH</option><option value="fr">FRANÇAIS</option><option value="it">ITALIANO</option><option value="de">DEUTSCH</option><option value="nl">NEDERLANDS</option><option value="es">ESPAÑOL</option><option value="ar">العربية</option></select><span>MAD</span></label></div>
+    </div>
+  </aside>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero__image hero__image--left" data-parallax="0.06">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1600&q=90" alt="Editorial fashion portrait" />
+        <span class="image-index">01 / 03</span>
+      </div>
+      <div class="hero__copy">
+        <p class="eyebrow">SS / 26 — CASABLANCA</p>
+        <h1><span>LESS</span><span>NOISE,</span><em>more form.</em></h1>
+        <p class="hero__intro">A contemporary Moroccan wardrobe shaped by coastal light, mineral textures and daily movement.</p>
+        <a class="arrow-link" href="#shop">Explore the collection <span>↘</span></a>
+      </div>
+      <div class="hero__image hero__image--right" data-parallax="-0.04">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1500&q=90" alt="Minimal fashion styling" />
+        <div class="vertical-label">NAFAS / نَفَس</div>
+      </div>
+      <div class="hero__stamp"><span>MADE</span><b>IN</b><span>MAROC</span></div>
+    </section>
+
+    <section class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>FREE DELIVERY OVER 2,500 MAD</span><i>✦</i><span>MADE IN MOROCCO</span><i>✦</i><span>CASABLANCA — RABAT — WORLD</span><i>✦</i><span>FREE DELIVERY OVER 2,500 MAD</span><i>✦</i><span>MADE IN MOROCCO</span><i>✦</i><span>CASABLANCA — RABAT — WORLD</span><i>✦</i>
+      </div>
+    </section>
+
+    <section class="manifesto reveal" id="story">
+      <div class="section-code">[ 01 ]</div>
+      <p class="manifesto__lead">NAFAS is an exercise in restraint.</p>
+      <p class="manifesto__body">We design clothing with enough presence to be remembered and enough quiet to be lived in. Familiar Moroccan materials, modern proportions, local making.</p>
+      <div class="manifesto__arabic">نَفَس</div>
+    </section>
+
+    <section class="editorial-grid reveal">
+      <article class="editorial-card editorial-card--large">
+        <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1600&q=88" alt="NAFAS editorial" />
+        <div class="editorial-card__overlay"><span>CASA / 01</span><h2>The city<br>as a textile.</h2></div>
+      </article>
+      <article class="editorial-card editorial-card--text">
+        <div><span class="micro">MATERIAL NOTE</span><h3>Dry linen.<br>Dense cotton.<br>Soft wool.</h3></div>
+        <p>Pieces designed for heat, shade and the temperature shift after sunset.</p>
+      </article>
+      <article class="editorial-card editorial-card--small">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=88" alt="Editorial detail" />
+        <span class="caption">NAFAS WOMAN / 02</span>
+      </article>
+    </section>
+
+    <section class="shop-section" id="shop">
+      <div class="shop-heading reveal">
+        <div>
+          <span class="section-code">[ 02 ]</span>
+          <p class="eyebrow">CURRENT COLLECTION</p>
+        </div>
+        <h2>Shop <em>the edit.</em></h2>
+        <div class="shop-heading__meta"><span id="productCount">18 pieces</span><span>Prices in MAD</span></div>
+      </div>
+
+      <div class="filters reveal">
+        <div class="filter-group" id="audienceFilters" aria-label="Department">
+          <button class="filter active" data-audience-filter="all">ALL</button>
+          <button class="filter" data-audience-filter="Women">WOMEN</button>
+          <button class="filter" data-audience-filter="Men">MEN</button>
+          <button class="filter" data-audience-filter="Unisex">UNISEX</button>
+          <button class="filter" data-audience-filter="Accessories">OBJECTS</button>
+        </div>
+        <div class="filter-controls">
+          <div class="category-wrap">
+            <label for="categorySelect">CATEGORY</label>
+            <select id="categorySelect"><option value="all">All categories</option></select>
+          </div>
+          <div class="sort-wrap">
+            <label for="sortSelect">SORT</label>
+            <select id="sortSelect"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="name">Name</option></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-grid" id="productGrid" aria-live="polite"></div>
+      <div class="shop-end"><span>END OF EDIT</span><span id="shopRange">18 / 18</span></div>
+    </section>
+
+    <section class="campaign reveal">
+      <div class="campaign__media" data-parallax="0.04"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1800&q=90" alt="NAFAS campaign" /></div>
+      <div class="campaign__copy">
+        <span class="section-code">[ 03 ]</span>
+        <p class="eyebrow">JOURNAL 001 / AGAFAY</p>
+        <h2>Between<br><em>heat & shadow.</em></h2>
+        <p>Our first seasonal study looks at the way fabric behaves in dry light: structure at noon, movement after dusk.</p>
+        <a class="arrow-link" href="#newsletter">Read the journal <span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="service-strip reveal">
+      <div><span>01</span><h3>Morocco-wide delivery</h3><p>35–69 MAD depending on zone. Free over 2,500 MAD.</p></div>
+      <div><span>02</span><h3>14-day returns</h3><p>Unused pieces with original tags, subject to final return policy.</p></div>
+      <div><span>03</span><h3>Local support</h3><p>WhatsApp-ready customer service and order tracking.</p></div>
+    </section>
+
+    <section class="newsletter" id="newsletter">
+      <div class="newsletter__arabic">رسائل قليلة، أشياء جميلة</div>
+      <div class="newsletter__content reveal">
+        <p class="eyebrow">NAFAS LETTERS</p>
+        <h2>Occasional notes.<br><em>No noise.</em></h2>
+        <form id="newsletterForm"><input type="email" placeholder="EMAIL ADDRESS" required /><button type="submit">JOIN ↗</button></form>
+        <small>By subscribing you agree to receive NAFAS collection and journal updates.</small>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer__top"><a class="logo logo--footer" href="#top"><span>NAFAS</span><small>CASABLANCA</small></a><div class="footer__statement">Contemporary clothing,<br>made in Morocco.</div></div>
+    <div class="footer__grid">
+      <div><span class="micro">SHOP</span><a href="#shop">Women</a><a href="#shop">Men</a><a href="#shop">Objects</a><a href="#shop">New arrivals</a></div>
+      <div><span class="micro">HELP</span><button id="footerTrack">Track order</button><a href="#">Delivery & returns</a><a href="#">Size guide</a><a href="#">Contact</a></div>
+      <div><span class="micro">SOCIAL</span><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">TikTok</a></div>
+      <div class="footer__address"><span class="micro">CASABLANCA</span><p>Concept store / prototype<br>Morocco<br><br>hello@nafas-casa.ma</p></div>
+    </div>
+    <div class="footer__bottom"><span>© 2026 NAFAS</span><span>DEMO E-COMMERCE / MAD</span><span>INTERACTIVE DESIGN PREVIEW</span><span>نَفَس</span></div>
+  </footer>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="drawer__head"><div><span class="micro">YOUR BAG</span><h2 id="cartTitle">0 items</h2></div><button class="close-x" id="closeCart" aria-label="Close cart">×</button></div>
+    <div class="drawer__body" id="cartItems"></div>
+    <div class="drawer__foot" id="cartFoot">
+      <div class="cart-progress"><div class="cart-progress__text"><span id="deliveryText">Free delivery at 2,500 MAD</span><strong id="progressValue">0%</strong></div><div class="cart-progress__track"><span id="progressBar"></span></div></div>
+      <div class="totals"><div><span>Subtotal</span><b id="cartSubtotal">0 MAD</b></div><small>Shipping calculated at checkout.</small></div>
+      <button class="checkout-btn" id="checkoutBtn">CHECKOUT <span>↗</span></button>
+    </div>
+  </aside>
+
+  <div class="modal" id="productModal" aria-hidden="true">
+    <button class="modal__backdrop" data-close-modal aria-label="Close"></button>
+    <div class="product-modal__panel" id="productModalPanel"></div>
+  </div>
+
+  <div class="modal" id="checkoutModal" aria-hidden="true">
+    <button class="modal__backdrop" data-close-checkout aria-label="Close"></button>
+    <div class="checkout-panel">
+      <div class="checkout__head"><div><span class="micro">SECURE CHECKOUT</span><h2>Complete order</h2></div><button class="close-x" id="closeCheckout">×</button></div>
+      <div class="checkout-layout">
+        <form id="checkoutForm" class="checkout-form">
+          <div class="form-section"><span class="form-step">01 — CONTACT</span><div class="field-row"><label>First name<input name="firstName" required></label><label>Last name<input name="lastName" required></label></div><div class="field-row"><label>Email<input name="email" type="email"></label><label>Phone<input name="phone" value="+212 " required></label></div></div>
+          <div class="form-section"><span class="form-step">02 — DELIVERY</span><label>Address<input name="address" required></label><div class="field-row"><label>City<input name="city" id="cityInput" placeholder="Casablanca" required></label><label>Region<select name="region"><option>Casablanca-Settat</option><option>Rabat-Salé-Kénitra</option><option>Marrakech-Safi</option><option>Fès-Meknès</option><option>Tanger-Tétouan-Al Hoceïma</option><option>Souss-Massa</option><option>Drâa-Tafilalet</option><option>Béni Mellal-Khénifra</option><option>Oriental</option><option>Guelmim-Oued Noun</option><option>Laâyoune-Sakia El Hamra</option><option>Dakhla-Oued Ed-Dahab</option></select></label></div><label>Delivery note<textarea name="notes" rows="3" placeholder="Apartment, landmark, preferred call time…"></textarea></label></div>
+          <div class="form-section"><span class="form-step">03 — PAYMENT</span><label class="payment-option"><input type="radio" name="paymentMethod" value="cod" checked><span><b>Cash on delivery</b><small>Pay the courier in MAD when your order arrives.</small></span></label><label class="payment-option"><input type="radio" name="paymentMethod" value="bank"><span><b>Bank transfer</b><small>Order is reserved; transfer instructions appear after confirmation.</small></span></label><div class="payment-note">Card checkout is intentionally left as an integration point for CMI / Payzone / your PSP credentials in production.</div></div>
+          <button class="checkout-btn" type="submit" id="placeOrderBtn">PLACE ORDER <span>↗</span></button>
+          <p class="form-error" id="checkoutError"></p>
+        </form>
+        <aside class="order-summary"><span class="form-step">ORDER SUMMARY</span><div id="checkoutItems"></div><div class="summary-totals"><div><span>Subtotal</span><b id="checkoutSubtotal">0 MAD</b></div><div><span id="shippingLabel">Shipping</span><b id="checkoutShipping">49 MAD</b></div><div class="summary-total"><span>Total</span><b id="checkoutTotal">0 MAD</b></div></div></aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="trackModal" aria-hidden="true">
+    <button class="modal__backdrop" data-close-track aria-label="Close"></button>
+    <div class="track-panel">
+      <div class="checkout__head"><div><span class="micro">ORDER STATUS</span><h2>Track your order</h2></div><button class="close-x" id="closeTrack">×</button></div>
+      <form id="trackForm"><label>Order number<input name="number" placeholder="NF-260827-AB12" required></label><label>Phone number<input name="phone" placeholder="+212 6…" required></label><button class="checkout-btn" type="submit">TRACK <span>↗</span></button></form>
+      <div id="trackResult"></div>
+    </div>
+  </div>
+
+  <div class="search-overlay" id="searchOverlay" aria-hidden="true">
+    <button class="close-x" id="closeSearch">×</button>
+    <div class="search-overlay__inner"><span class="micro">SEARCH NAFAS</span><input id="searchInput" type="search" placeholder="TYPE TO SEARCH" autocomplete="off"><div id="searchResults"></div></div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="../preview-mode.js"></script>
+  <script src="./i18n.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

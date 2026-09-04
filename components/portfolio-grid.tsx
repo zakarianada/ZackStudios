@@ -51,15 +51,17 @@ export function PortfolioGrid({ compact = false, scope = "all" }: { compact?: bo
       </div>
 
       <motion.div layout className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {visible.map((project, index) => (
-          <motion.button
+        {visible.map((project, index) => {
+          const isFeaturedLandscape = index % 7 === 0 && !compact && project.orientation !== "portrait";
+          return (
+            <motion.button
             layout
             key={project.slug}
             initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(index, 8) * .035 }}
             onClick={() => setActive(project)}
-            className={`group overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d0e] text-left transition hover:-translate-y-1 hover:border-white/22 ${index % 7 === 0 && !compact ? "sm:col-span-2" : ""}`}
+            className={`group overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d0e] text-left transition hover:-translate-y-1 hover:border-white/22 ${isFeaturedLandscape ? "sm:col-span-2" : ""}`}
           >
-            <div className={`relative overflow-hidden bg-black ${index % 7 === 0 && !compact ? "aspect-[16/9]" : "aspect-[4/5]"}`}>
+            <div className={`relative overflow-hidden bg-black ${isFeaturedLandscape ? "aspect-[16/9]" : "aspect-[4/5]"}`}>
               <Image src={project.cover} alt={project.title} fill className="object-cover transition duration-700 group-hover:scale-[1.035]" sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/52 via-transparent to-transparent opacity-70" />
               <span className="absolute left-4 top-4 rounded-full border border-white/12 bg-black/55 px-2.5 py-1 text-[8px] uppercase tracking-[.14em] text-white/70 backdrop-blur-md">{String(index + 1).padStart(2, "0")}</span>
@@ -70,8 +72,9 @@ export function PortfolioGrid({ compact = false, scope = "all" }: { compact?: bo
               <div className="mt-1 flex items-end justify-between gap-3"><h3 className="text-lg font-semibold tracking-[-.02em]">{project.title}</h3><span className="text-[9px] text-white/35">{project.year}</span></div>
               <p className="mt-2 line-clamp-2 text-xs leading-5 text-white/43">{project.summary}</p>
             </div>
-          </motion.button>
-        ))}
+            </motion.button>
+          );
+        })}
       </motion.div>
       {compact && <div className="mt-8 text-center"><Link href="/work" className="inline-flex items-center gap-3 rounded-sm border border-white/15 px-5 py-3 text-[10px] font-semibold uppercase tracking-[.13em] text-white/70 transition hover:border-[#ff3439]/60 hover:text-white">View full design archive <ArrowUpRight className="size-4" /></Link></div>}
       <ProjectModal project={active} onClose={() => setActive(null)} onNavigate={navigate} />

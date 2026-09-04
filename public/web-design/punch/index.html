@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="description" content="Punch — bodybuilding, fitness and combat clubs in Morocco. Bilingual French / Arabic experience." />
+  <title>PUNCH — Find Your Purpose</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700&family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <div class="top-strip-message">
+        <span class="pulse-dot"></span>
+        <span data-i18n="topStrip">OUVERT 7J/7 · 06:00 — 23:00</span>
+      </div>
+      <div class="top-strip-links">
+        <a href="tel:+212622212262">+212 6 22 21 22 62</a>
+        <button class="lang-switch" id="langSwitch" type="button" aria-label="Changer de langue">
+          <span class="active-lang">FR</span>
+          <span class="lang-divider">/</span>
+          <span>ع</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-wrap">
+      <a href="#top" class="brand" aria-label="Punch home">
+        <span class="brand-mark" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="brand-type">PUNCH</span>
+        <small>BY BADR HARI</small>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navigation principale">
+        <a href="#experience" data-i18n="navExperience">Expérience</a>
+        <a href="#programs" data-i18n="navPrograms">Entraînement</a>
+        <a href="#clubs" data-i18n="navClubs">Clubs</a>
+        <a href="#plans" data-i18n="navPlans">Abonnements</a>
+        <a href="#app" data-i18n="navApp">Punch App</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="ghost-btn location-quick" type="button" data-scroll="#clubs">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-12A7 7 0 1 0 5 9c0 5.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>
+          <span data-i18n="findClub">Trouver un club</span>
+        </button>
+        <button class="primary-btn compact" type="button" data-open-join>
+          <span data-i18n="joinNow">Devenir membre</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
+        </button>
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-inner container">
+        <a href="#experience" data-mobile-link data-i18n="navExperience">Expérience</a>
+        <a href="#programs" data-mobile-link data-i18n="navPrograms">Entraînement</a>
+        <a href="#clubs" data-mobile-link data-i18n="navClubs">Clubs</a>
+        <a href="#plans" data-mobile-link data-i18n="navPlans">Abonnements</a>
+        <a href="#app" data-mobile-link data-i18n="navApp">Punch App</a>
+        <button class="primary-btn" type="button" data-open-join><span data-i18n="joinNow">Devenir membre</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-media" aria-hidden="true">
+        <div class="hero-image"></div>
+        <div class="hero-vignette"></div>
+        <div class="hero-grid"></div>
+      </div>
+
+      <div class="hero-cut hero-cut-a" aria-hidden="true"></div>
+      <div class="hero-cut hero-cut-b" aria-hidden="true"></div>
+
+      <div class="container hero-content">
+        <div class="hero-copy reveal">
+          <div class="eyebrow light">
+            <span class="eyebrow-line"></span>
+            <span data-i18n="heroEyebrow">BODYBUILDING · FITNESS · COMBAT</span>
+          </div>
+          <h1>
+            <span data-i18n="heroLine1">FIND YOUR</span>
+            <em data-i18n="heroLine2">PURPOSE.</em>
+          </h1>
+          <p class="hero-lead" data-i18n="heroLead">Plus qu’une salle. Un terrain pour construire votre force, votre discipline et votre communauté.</p>
+
+          <div class="hero-actions">
+            <button class="primary-btn xl" type="button" data-open-join>
+              <span data-i18n="startJourney">Commencer maintenant</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
+            </button>
+            <button class="play-link" type="button" data-scroll="#experience">
+              <span class="play-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z"/></svg></span>
+              <span>
+                <strong data-i18n="discoverPunch">Découvrir Punch</strong>
+                <small data-i18n="discoverSub">L’expérience Dar Lkbira</small>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <aside class="hero-panel reveal delay-2">
+          <div class="hero-panel-top">
+            <span class="panel-label" data-i18n="nearestClub">VOTRE CLUB</span>
+            <span class="status-pill"><i></i><span data-i18n="openToday">Ouvert aujourd’hui</span></span>
+          </div>
+          <div class="hero-panel-main">
+            <p class="panel-kicker" data-i18n="heroPanelKicker">5 clubs autour de Casablanca</p>
+            <strong id="nearestClubName">Punch Tachfine</strong>
+            <span id="nearestClubMeta">06:00 — 23:00</span>
+          </div>
+          <div class="hero-panel-actions">
+            <button type="button" id="heroLocateBtn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+              <span data-i18n="useLocation">Utiliser ma position</span>
+            </button>
+            <button type="button" data-scroll="#clubs">
+              <span data-i18n="viewMap">Voir la carte</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
+            </button>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hero-stats container reveal delay-3">
+        <div><strong>10+</strong><span data-i18n="statZones">espaces d’entraînement</span></div>
+        <div><strong>100s</strong><span data-i18n="statMachines">machines & équipements</span></div>
+        <div><strong>7/7</strong><span data-i18n="statOpen">accès toute la semaine</span></div>
+        <div><strong>100%</strong><span data-i18n="statWomen">espace femmes dédié</span></div>
+      </div>
+    </section>
+
+    <section class="marquee-section" aria-label="Disciplines">
+      <div class="marquee-track">
+        <span>BODYBUILDING</span><i></i><span>FITNESS</span><i></i><span>KICKBOXING</span><i></i><span>CARDIO</span><i></i><span>MMA</span><i></i><span>CROSS TRAINING</span><i></i><span>BODYBUILDING</span><i></i><span>FITNESS</span><i></i><span>KICKBOXING</span><i></i><span>CARDIO</span><i></i><span>MMA</span><i></i><span>CROSS TRAINING</span><i></i>
+      </div>
+    </section>
+
+    <section class="experience section-pad" id="experience">
+      <div class="container">
+        <div class="section-head split reveal">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="experienceEyebrow">DAR LKBIRA · NOTRE CONCEPT</span></div>
+            <h2 data-i18n="experienceTitle">CONSTRUIT POUR<br><em>VOUS DÉPASSER.</em></h2>
+          </div>
+          <div class="section-head-copy">
+            <p data-i18n="experienceLead">Punch démocratise l’accès à des installations de qualité au Maroc avec une expérience complète : entraînement, coaching, combat, récupération, lounge et communauté.</p>
+            <button class="text-link" type="button" data-open-join><span data-i18n="becomePuncheur">Devenir Puncheur</span><svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg></button>
+          </div>
+        </div>
+
+        <div class="experience-grid">
+          <article class="feature-card large reveal">
+            <div class="feature-image feature-image-bodybuilding"></div>
+            <div class="feature-overlay"></div>
+            <div class="feature-number">01</div>
+            <div class="feature-content">
+              <span data-i18n="feature1Kicker">ZONE FORCE</span>
+              <h3 data-i18n="feature1Title">Bodybuilding sans compromis</h3>
+              <p data-i18n="feature1Text">Plate-loaded, racks, charges libres et machines guidées pour progresser de la première répétition au prochain PR.</p>
+            </div>
+          </article>
+
+          <article class="feature-card reveal delay-1">
+            <div class="feature-icon">
+              <svg viewBox="0 0 48 48"><path d="M9 24h30M13 17v14M7 20v8M35 17v14M41 20v8"/></svg>
+            </div>
+            <div class="feature-number">02</div>
+            <div class="feature-content dark-copy">
+              <span data-i18n="feature2Kicker">COACHING</span>
+              <h3 data-i18n="feature2Title">Des experts à vos côtés</h3>
+              <p data-i18n="feature2Text">Des coachs certifiés et expérimentés pour structurer votre progression et sécuriser votre technique.</p>
+            </div>
+          </article>
+
+          <article class="feature-card accent reveal delay-2">
+            <div class="feature-icon">
+              <svg viewBox="0 0 48 48"><path d="M24 5 8 13v11c0 10 6.8 16.5 16 19 9.2-2.5 16-9 16-19V13L24 5Z"/><path d="m17 24 5 5 10-11"/></svg>
+            </div>
+            <div class="feature-number">03</div>
+            <div class="feature-content dark-copy">
+              <span data-i18n="feature3Kicker">100% FEMMES</span>
+              <h3 data-i18n="feature3Title">Votre espace, votre rythme</h3>
+              <p data-i18n="feature3Text">Des zones dédiées pensées pour l’autonomie, la confiance et le confort d’entraînement.</p>
+            </div>
+          </article>
+
+          <article class="feature-card wide reveal delay-1">
+            <div class="feature-content dark-copy wide-content">
+              <span data-i18n="feature4Kicker">DAR LKBIRA</span>
+              <h3 data-i18n="feature4Title">Entraînez-vous. Restez. Connectez-vous.</h3>
+              <p data-i18n="feature4Text">Healthy lounge, boutique, événements et moments de communauté : l’expérience continue après votre séance.</p>
+              <div class="mini-metrics">
+                <span><strong>06—23</strong><small data-i18n="dailyAccess">accès quotidien</small></span>
+                <span><strong>5</strong><small data-i18n="clubsNetwork">clubs réseau</small></span>
+                <span><strong>1</strong><small data-i18n="community">communauté</small></span>
+              </div>
+            </div>
+            <div class="wide-image"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs section-pad" id="programs">
+      <div class="container">
+        <div class="section-head centered reveal">
+          <div class="eyebrow centered"><span class="eyebrow-line"></span><span data-i18n="programsEyebrow">CHOISISSEZ VOTRE TERRAIN</span><span class="eyebrow-line"></span></div>
+          <h2 data-i18n="programsTitle">TRAIN. BUILD. <em>REPEAT.</em></h2>
+          <p data-i18n="programsLead">Des disciplines différentes, une même exigence : progresser avec intention.</p>
+        </div>
+
+        <div class="program-tabs reveal" role="tablist">
+          <button class="program-tab active" data-program="bodybuilding" role="tab" aria-selected="true"><span>01</span><strong data-i18n="tabBodybuilding">Bodybuilding</strong></button>
+          <button class="program-tab" data-program="fitness" role="tab" aria-selected="false"><span>02</span><strong data-i18n="tabFitness">Fitness</strong></button>
+          <button class="program-tab" data-program="combat" role="tab" aria-selected="false"><span>03</span><strong data-i18n="tabCombat">Combat</strong></button>
+          <button class="program-tab" data-program="women" role="tab" aria-selected="false"><span>04</span><strong data-i18n="tabWomen">100% Femmes</strong></button>
+        </div>
+
+        <div class="program-stage reveal delay-1" id="programStage">
+          <div class="program-photo" id="programPhoto"></div>
+          <div class="program-scrim"></div>
+          <div class="program-stage-copy">
+            <span class="stage-index" id="programIndex">01</span>
+            <div>
+              <span class="stage-kicker" id="programKicker">STRENGTH · HYPERTROPHY</span>
+              <h3 id="programTitle">BODYBUILDING</h3>
+              <p id="programDescription"></p>
+              <div class="stage-tags" id="programTags"></div>
+            </div>
+          </div>
+          <button class="stage-cta" type="button" data-open-join>
+            <span data-i18n="tryProgram">Choisir ce programme</span>
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
+          </button>
+        </div>
+
+        <div class="schedule-block reveal">
+          <div class="schedule-head">
+            <div>
+              <span class="small-label" data-i18n="todayClasses">COURS DU JOUR</span>
+              <h3 data-i18n="scheduleTitle">Votre prochaine séance commence ici.</h3>
+            </div>
+            <div class="schedule-filters" id="classFilters">
+              <button class="active" data-filter="all" data-i18n="filterAll">Tous</button>
+              <button data-filter="bodybuilding" data-i18n="filterStrength">Force</button>
+              <button data-filter="fitness" data-i18n="filterFitness">Fitness</button>
+              <button data-filter="combat" data-i18n="filterCombat">Combat</button>
+              <button data-filter="women" data-i18n="filterWomen">Femmes</button>
+            </div>
+          </div>
+          <div class="class-list" id="classList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="clubs section-pad" id="clubs">
+      <div class="container">
+        <div class="section-head split reveal">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="clubsEyebrow">LE RÉSEAU PUNCH</span></div>
+            <h2 data-i18n="clubsTitle">TROUVEZ VOTRE<br><em>HOME GYM.</em></h2>
+          </div>
+          <div class="section-head-copy">
+            <p data-i18n="clubsLead">Explorez nos clubs autour de Casablanca, comparez les espaces et trouvez le plus proche de vous.</p>
+            <button class="locate-btn" id="locateBtn" type="button">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+              <span data-i18n="findNearest">Trouver le plus proche</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container map-shell reveal">
+        <div class="map-sidebar">
+          <div class="club-search-wrap">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="clubSearch" type="search" data-i18n-placeholder="searchClub" placeholder="Rechercher un club..." />
+          </div>
+          <div class="club-list" id="clubList"></div>
+        </div>
+        <div class="map-wrap">
+          <div id="map" aria-label="Carte des clubs Punch"></div>
+          <div class="map-fallback" id="mapFallback">
+            <div class="fallback-grid"></div>
+            <div class="fallback-copy">
+              <strong data-i18n="mapLoading">Chargement de la carte…</strong>
+              <span data-i18n="mapFallback">Les clubs restent accessibles dans la liste.</span>
+            </div>
+          </div>
+          <div class="map-legend"><span><i></i>PUNCH</span><small data-i18n="mapLegend">Clubs autour de Casablanca</small></div>
+        </div>
+      </div>
+
+      <div class="container club-carousel reveal" id="clubCarousel"></div>
+    </section>
+
+    <section class="plans section-pad" id="plans">
+      <div class="plans-bg-text" aria-hidden="true">PUNCH</div>
+      <div class="container">
+        <div class="section-head centered light reveal">
+          <div class="eyebrow centered light"><span class="eyebrow-line"></span><span data-i18n="plansEyebrow">UN PASS. VOTRE PROGRESSION.</span><span class="eyebrow-line"></span></div>
+          <h2 data-i18n="plansTitle">CHOISISSEZ VOTRE <em>PASS.</em></h2>
+          <p data-i18n="plansLead">Des formules simples, conçues pour vous donner accès à l’essentiel sans sacrifier l’expérience.</p>
+        </div>
+
+        <div class="plan-grid reveal" id="planGrid"></div>
+
+        <div class="plan-compare reveal">
+          <button class="compare-toggle" id="compareToggle" type="button">
+            <span data-i18n="comparePlans">Comparer tous les plans</span>
+            <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="compare-table-wrap" id="compareTableWrap">
+            <div class="compare-table" id="compareTable"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="app-section section-pad" id="app">
+      <div class="container app-grid">
+        <div class="app-copy reveal">
+          <div class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="appEyebrow">PUNCH APP · COMING SOON</span></div>
+          <h2 data-i18n="appTitle">VOTRE CLUB<br><em>DANS LA POCHE.</em></h2>
+          <p data-i18n="appLead">La digitalisation au cœur de l’expérience : réservez, entraînez-vous, payez et restez connecté depuis une seule interface.</p>
+          <div class="app-features" id="appFeatures"></div>
+          <div class="store-buttons">
+            <button type="button" class="store-btn" aria-label="App Store">
+              <svg viewBox="0 0 24 24"><path d="M16.8 13.1c0-2.2 1.8-3.3 1.9-3.4-1-.9-2.7-1-3.2-1-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.2 9.2.8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3.1-.7s1.9.7 3.1.7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.9-1.1-2.9-4.4ZM14.6 7.2c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.1 1.8-1 2.9 1 .1 2.1-.5 2.8-1.3Z"/></svg>
+              <span><small data-i18n="soonOn">Bientôt sur</small><strong>App Store</strong></span>
+            </button>
+            <button type="button" class="store-btn" aria-label="Google Play">
+              <svg viewBox="0 0 24 24"><path d="m4 3 10.8 9L4 21V3Zm11.9 8 2.4-1.4c.8-.5 1.8 0 1.8.9s-1 1.4-1.8.9L15.9 12v-1Zm0 2 2.4 1.4c.8.5 1.8 0 1.8-.9s-1-1.4-1.8-.9L15.9 12v1Z"/></svg>
+              <span><small data-i18n="soonOn">Bientôt sur</small><strong>Google Play</strong></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="phone-stage reveal delay-1" aria-hidden="true">
+          <div class="ring-text">PUNCH · FIND YOUR PURPOSE · PUNCH · FIND YOUR PURPOSE · </div>
+          <div class="phone phone-back">
+            <div class="phone-screen screen-workout">
+              <div class="phone-status"><span>09:41</span><span>● ● ●</span></div>
+              <div class="screen-title">TODAY</div>
+              <div class="workout-card"><small>UPPER BODY</small><strong>PUSH / 06</strong><div class="progress"><i></i></div></div>
+              <div class="mini-row"><span>SETS<strong>18</strong></span><span>VOL.<strong>7.8T</strong></span></div>
+            </div>
+          </div>
+          <div class="phone phone-front">
+            <div class="phone-screen screen-home">
+              <div class="phone-status"><span>09:41</span><span>● ● ●</span></div>
+              <div class="app-logo"><span class="mini-mark"></span>PUNCH</div>
+              <small>GOOD MORNING</small>
+              <strong class="hello">YASSINE.</strong>
+              <div class="qr-card"><span>MEMBER PASS</span><div class="fake-qr"></div><small>TACHFINE · ACTIVE</small></div>
+              <div class="phone-actions"><span>BOOK</span><span>TRAIN</span><span>SHOP</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="community-banner">
+      <div class="community-image"></div>
+      <div class="community-overlay"></div>
+      <div class="container community-content reveal">
+        <span class="big-arabic">دار كبيرة</span>
+        <div>
+          <span class="small-label light" data-i18n="communityKicker">PLUS QU’UN CLUB</span>
+          <h2 data-i18n="communityTitle">VOTRE <em>DAR LKBIRA.</em></h2>
+          <p data-i18n="communityText">Entraînez-vous, mangez, échangez, riez. Chez Punch, vous n’êtes pas un simple client : vous faites partie de la maison.</p>
+          <button class="primary-btn xl" type="button" data-open-join><span data-i18n="joinCommunity">Rejoindre la communauté</span><svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact section-pad" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal">
+          <div class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="contactEyebrow">PRÊT À COMMENCER ?</span></div>
+          <h2 data-i18n="contactTitle">VOTRE PROCHAINE<br><em>VERSION COMMENCE ICI.</em></h2>
+          <p data-i18n="contactLead">Choisissez votre club, dites-nous votre objectif, et notre équipe vous recontacte.</p>
+          <div class="contact-cards">
+            <a href="tel:+212622212262"><span>01</span><div><small data-i18n="callUs">Appelez-nous</small><strong>+212 6 22 21 22 62</strong></div></a>
+            <a href="#clubs"><span>02</span><div><small data-i18n="visitClub">Visitez un club</small><strong data-i18n="fiveLocations">5 emplacements</strong></div></a>
+          </div>
+        </div>
+
+        <form class="lead-form reveal delay-1" id="contactForm">
+          <div class="form-grid two">
+            <label><span data-i18n="firstName">Prénom</span><input name="firstName" required autocomplete="given-name" /></label>
+            <label><span data-i18n="lastName">Nom</span><input name="lastName" autocomplete="family-name" /></label>
+          </div>
+          <div class="form-grid two">
+            <label><span data-i18n="phone">Téléphone</span><input name="phone" type="tel" required placeholder="+212 6..." /></label>
+            <label><span data-i18n="email">Email</span><input name="email" type="email" autocomplete="email" /></label>
+          </div>
+          <div class="form-grid two">
+            <label><span data-i18n="chooseClub">Club</span><select name="club" id="contactClub" required></select></label>
+            <label><span data-i18n="yourGoal">Votre objectif</span><select name="goal" id="goalSelect"></select></label>
+          </div>
+          <label class="consent"><input type="checkbox" required /><span data-i18n="consent">J’accepte d’être contacté par Punch au sujet de ma demande.</span></label>
+          <button class="primary-btn xl full" type="submit"><span data-i18n="sendRequest">Envoyer ma demande</span><svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg></button>
+          <div class="form-response" id="contactResponse" role="status"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-top">
+      <div class="footer-brand-col">
+        <a href="#top" class="brand footer-brand">
+          <span class="brand-mark"><span></span><span></span><span></span></span>
+          <span class="brand-type">PUNCH</span>
+          <small>BY BADR HARI</small>
+        </a>
+        <p data-i18n="footerTagline">Build a healthier Morocco. Stronger together.</p>
+      </div>
+      <div class="footer-links-col">
+        <strong data-i18n="explore">Explorer</strong>
+        <a href="#experience" data-i18n="navExperience">Expérience</a>
+        <a href="#programs" data-i18n="navPrograms">Entraînement</a>
+        <a href="#clubs" data-i18n="navClubs">Clubs</a>
+        <a href="#plans" data-i18n="navPlans">Abonnements</a>
+      </div>
+      <div class="footer-links-col">
+        <strong data-i18n="activities">Activités</strong>
+        <a href="#programs">Bodybuilding</a>
+        <a href="#programs">Fitness</a>
+        <a href="#programs">Kickboxing</a>
+        <a href="#programs">MMA</a>
+      </div>
+      <div class="newsletter-col">
+        <strong data-i18n="newsletterTitle">RESTEZ DANS LE GAME.</strong>
+        <p data-i18n="newsletterText">Nouveaux clubs, événements, offres et programmes.</p>
+        <form id="newsletterForm" class="newsletter-form">
+          <input type="email" name="email" required data-i18n-placeholder="emailPlaceholder" placeholder="Votre email" />
+          <button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg></button>
+        </form>
+        <div id="newsletterResponse" class="mini-response"></div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 PUNCH</span>
+      <span data-i18n="footerDemo">Concept full-stack FR / AR</span>
+      <span>Interactive design preview</span>
+    </div>
+  </footer>
+
+  <div class="sticky-mobile-cta">
+    <button type="button" data-scroll="#clubs"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12A7 7 0 1 0 5 9c0 5.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg><span data-i18n="navClubs">Clubs</span></button>
+    <button class="accent" type="button" data-open-join><span data-i18n="joinNow">Devenir membre</span><svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg></button>
+  </div>
+
+  <div class="modal" id="joinModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="joinTitle">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="join-dialog">
+      <button class="modal-close" type="button" data-close-modal aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+      <div class="join-left">
+        <div class="join-left-overlay"></div>
+        <div class="join-brand">
+          <span class="small-label light">PUNCH</span>
+          <h3 data-i18n="joinLeftTitle">NO EXCUSES.<br><em>JUST PURPOSE.</em></h3>
+          <p data-i18n="joinLeftText">Choisissez votre club et votre pass. L’équipe Punch vous recontacte pour finaliser votre adhésion.</p>
+        </div>
+        <div class="join-steps-labels">
+          <span class="active" data-step-dot="1">01</span><i></i><span data-step-dot="2">02</span><i></i><span data-step-dot="3">03</span>
+        </div>
+      </div>
+      <div class="join-right">
+        <form id="joinForm">
+          <div class="join-step active" data-step="1">
+            <span class="modal-step" data-i18n="stepOne">ÉTAPE 1 / 3 · VOTRE CLUB</span>
+            <h2 id="joinTitle" data-i18n="chooseHomeGym">Choisissez votre <em>Home Gym.</em></h2>
+            <div class="join-clubs" id="joinClubs"></div>
+            <button class="primary-btn xl full next-step" type="button" data-next="2"><span data-i18n="continue">Continuer</span><svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg></button>
+          </div>
+
+          <div class="join-step" data-step="2">
+            <button type="button" class="back-step" data-back="1"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg><span data-i18n="back">Retour</span></button>
+            <span class="modal-step" data-i18n="stepTwo">ÉTAPE 2 / 3 · VOTRE PASS</span>
+            <h2 data-i18n="choosePlan">Choisissez votre <em>Pass.</em></h2>
+            <div class="join-plans" id="joinPlans"></div>
+            <button class="primary-btn xl full next-step" type="button" data-next="3"><span data-i18n="continue">Continuer</span><svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg></button>
+          </div>
+
+          <div class="join-step" data-step="3">
+            <button type="button" class="back-step" data-back="2"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg><span data-i18n="back">Retour</span></button>
+            <span class="modal-step" data-i18n="stepThree">ÉTAPE 3 / 3 · VOS COORDONNÉES</span>
+            <h2 data-i18n="almostThere">Presque <em>chez vous.</em></h2>
+            <div class="modal-form-grid two">
+              <label><span data-i18n="firstName">Prénom</span><input name="firstName" required /></label>
+              <label><span data-i18n="lastName">Nom</span><input name="lastName" /></label>
+            </div>
+            <div class="modal-form-grid two">
+              <label><span data-i18n="phone">Téléphone</span><input name="phone" type="tel" required placeholder="+212 6..." /></label>
+              <label><span data-i18n="email">Email</span><input name="email" type="email" /></label>
+            </div>
+            <label><span data-i18n="yourGoal">Votre objectif</span><select name="goal" id="joinGoal"></select></label>
+            <label class="consent modal-consent"><input type="checkbox" required /><span data-i18n="consent">J’accepte d’être contacté par Punch au sujet de ma demande.</span></label>
+            <button class="primary-btn xl full" type="submit"><span data-i18n="requestMembership">Demander mon adhésion</span><svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg></button>
+            <div class="form-response" id="joinResponse" role="status"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="bookingModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+    <div class="modal-backdrop" data-close-booking></div>
+    <div class="booking-dialog">
+      <button class="modal-close dark-close" type="button" data-close-booking aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+      <span class="modal-step" data-i18n="classBooking">RÉSERVATION DE COURS</span>
+      <h2 id="bookingTitle">—</h2>
+      <p id="bookingMeta" class="booking-meta"></p>
+      <form id="bookingForm">
+        <input type="hidden" name="classId" id="bookingClassId" />
+        <label><span data-i18n="fullName">Nom complet</span><input name="name" required /></label>
+        <label><span data-i18n="phone">Téléphone</span><input name="phone" type="tel" required placeholder="+212 6..." /></label>
+        <label><span data-i18n="chooseClub">Club</span><select name="club" id="bookingClub"></select></label>
+        <label><span data-i18n="date">Date</span><input type="date" name="date" id="bookingDate" required /></label>
+        <button class="primary-btn xl full" type="submit"><span data-i18n="confirmBooking">Confirmer la demande</span><svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg></button>
+        <div class="form-response" id="bookingResponse"></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="../preview-mode.js"></script>
+  <script src="./demo-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

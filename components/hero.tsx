@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRef, type MouseEvent } from "react";
 import { Bot, Film, Palette, Sparkles } from "lucide-react";
 import { MagneticButton } from "@/components/ui/magnetic-button";
+import { useReducedMotionPreference } from "@/lib/use-reduced-motion";
 
 const floating = [
   { title: "VIDEO EDIT", image: "/work/afterlight.webp", position: "left-[2%] top-[13%]", rotate: -5 },
@@ -14,6 +15,7 @@ const floating = [
 ] as const;
 
 export function Hero() {
+  const reducedMotion = useReducedMotionPreference();
   const ref = useRef<HTMLDivElement>(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -23,6 +25,7 @@ export function Hero() {
   const imageY = useTransform(smy, [-1, 1], [-8, 8]);
 
   const onMove = (event: MouseEvent<HTMLDivElement>) => {
+    if (reducedMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     mx.set(((event.clientX - rect.left) / rect.width - 0.5) * 2);
@@ -57,7 +60,7 @@ export function Hero() {
             <span className="flex items-center gap-2"><Sparkles className="size-3.5 text-[#ff3439]" /> Web design</span>
           </div>
 
-          <motion.div style={{ x: imageX, y: imageY }} className="relative mx-auto mt-12 aspect-[3/4] w-full max-w-[430px] overflow-hidden rounded-2xl border border-[#ff3439]/35 shadow-[0_30px_90px_rgba(0,0,0,.65)] lg:hidden">
+          <motion.div className="relative mx-auto mt-12 aspect-[3/4] w-full max-w-[430px] overflow-hidden rounded-2xl border border-[#ff3439]/35 shadow-[0_30px_90px_rgba(0,0,0,.65)] lg:hidden">
             <Image src="/profile/zack-hero.png" alt="Zack, multidisciplinary creative" fill priority className="object-cover" sizes="(max-width: 1024px) 90vw, 430px" />
           </motion.div>
         </div>
@@ -67,7 +70,7 @@ export function Hero() {
           <div className="orbit-line absolute left-1/2 top-1/2 h-[82%] w-[74%] -translate-x-1/2 -translate-y-1/2 rotate-[16deg] opacity-30" />
 
           <div className="absolute left-1/2 top-1/2 h-[min(76vh,760px)] w-[min(68%,520px)] -translate-x-1/2 -translate-y-1/2">
-            <motion.div style={{ x: imageX, y: imageY }} className="relative size-full overflow-hidden rounded-[28px] border border-[#ff3439]/35 bg-[#090909] shadow-[0_35px_100px_rgba(0,0,0,.72),0_0_70px_rgba(255,38,44,.14)]">
+            <motion.div style={{ x: reducedMotion ? 0 : imageX, y: reducedMotion ? 0 : imageY }} className="relative size-full overflow-hidden rounded-[28px] border border-[#ff3439]/35 bg-[#090909] shadow-[0_35px_100px_rgba(0,0,0,.72),0_0_70px_rgba(255,38,44,.14)]">
               <Image src="/profile/zack-hero.png" alt="Zack, multidisciplinary creative" fill priority className="object-cover" sizes="(max-width: 1280px) 38vw, 520px" />
             </motion.div>
           </div>
@@ -77,9 +80,9 @@ export function Hero() {
               key={card.title}
               className={`absolute z-20 w-[132px] overflow-hidden rounded-lg border border-[#ff3439]/45 bg-black/78 p-2 shadow-[0_18px_45px_rgba(0,0,0,.62)] backdrop-blur-md xl:w-[150px] ${card.position}`}
               style={{ rotate: card.rotate }}
-              animate={{ y: [0, index % 2 ? -10 : 9, 0], rotate: [card.rotate, card.rotate + (index % 2 ? 1.5 : -1.5), card.rotate] }}
+              animate={reducedMotion ? { y: 0, rotate: card.rotate } : { y: [0, index % 2 ? -10 : 9, 0], rotate: [card.rotate, card.rotate + (index % 2 ? 1.5 : -1.5), card.rotate] }}
               transition={{ duration: 5 + index * .7, repeat: Infinity, ease: "easeInOut" }}
-              whileHover={{ scale: 1.08, rotate: 0, zIndex: 40 }}
+              whileHover={reducedMotion ? undefined : { scale: 1.08, rotate: 0, zIndex: 40 }}
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-md">
                 <Image src={card.image} alt="" fill className="object-cover" sizes="150px" />

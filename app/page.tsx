@@ -7,6 +7,8 @@ import { PortfolioGrid } from "@/components/portfolio-grid";
 import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
 import { WebShowcase } from "@/components/web-showcase";
+import { ClientReviews } from "@/components/client-reviews";
+import { clientReviews } from "@/lib/testimonials";
 
 export default function HomePage() {
   return (
@@ -42,7 +44,8 @@ export default function HomePage() {
       </div>
 
       <AboutSection />
-      <ContactSection />
+      <ClientReviews />
+      <ContactSection sectionNumber={clientReviews.length > 0 ? 6 : 5} />
 
       <footer className="border-t border-white/8 bg-[#060606]">
         <div className="mx-auto flex max-w-[1500px] flex-col gap-5 px-5 py-8 text-xs text-white/38 md:flex-row md:items-center md:justify-between md:px-9">

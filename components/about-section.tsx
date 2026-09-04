@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Bot, Film, Layers3, Palette, Sparkles } from "lucide-react";
+import { ArrowUpRight, Bot, Film, Layers3, Palette, Sparkles } from "lucide-react";
 
 const capabilities = [
   [Film, "Video editing", "Cinematic edits, commercial, travel, property and social video."],
@@ -38,6 +38,7 @@ export function AboutSection() {
             ))}
           </div>
           <div className="mt-7 flex items-center gap-3 text-[10px] uppercase tracking-[.14em] text-white/48"><Sparkles className="size-4 text-[#ff3439]" /> Discounts are available for selected projects initiated by email.</div>
+          <a href="#contact" className="mt-7 inline-flex min-h-11 items-center gap-3 text-[10px] font-semibold uppercase tracking-[.14em] text-white/75 transition hover:text-white">Start a conversation <ArrowUpRight className="size-4 text-[#ff3439]" /></a>
         </div>
       </div>
     </section>

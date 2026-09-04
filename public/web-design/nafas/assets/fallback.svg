@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#d9d3c9"/>
+  <path d="M0 830L900 420V1200H0Z" fill="#b86f51" opacity=".68"/>
+  <circle cx="620" cy="280" r="180" fill="#dce573" opacity=".8"/>
+  <text x="55" y="100" fill="#171713" font-family="Arial" font-size="42" font-weight="700">NAFAS</text>
+  <text x="56" y="145" fill="#171713" font-family="monospace" font-size="16" letter-spacing="5">CASABLANCA / IMAGE</text>
+  <text x="55" y="1110" fill="#171713" font-family="Georgia" font-size="82">نَفَس</text>
+</svg>

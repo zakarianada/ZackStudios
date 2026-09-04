@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import type { MouseEvent, ReactNode } from "react";
+import { useReducedMotionPreference } from "@/lib/use-reduced-motion";
 
 export function MagneticButton({
   href,
@@ -18,8 +19,10 @@ export function MagneticButton({
   const y = useMotionValue(0);
   const sx = useSpring(x, { stiffness: 260, damping: 20 });
   const sy = useSpring(y, { stiffness: 260, damping: 20 });
+  const reducedMotion = useReducedMotionPreference();
 
   const move = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (reducedMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const rect = event.currentTarget.getBoundingClientRect();
     x.set((event.clientX - (rect.left + rect.width / 2)) * 0.16);
     y.set((event.clientY - (rect.top + rect.height / 2)) * 0.16);
@@ -31,7 +34,7 @@ export function MagneticButton({
   };
 
   return (
-    <motion.div style={{ x: sx, y: sy }}>
+    <motion.div style={{ x: reducedMotion ? 0 : sx, y: reducedMotion ? 0 : sy }}>
       <Link
         href={href}
         onMouseMove={move}

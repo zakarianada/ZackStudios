@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
+import { useReducedMotionPreference } from "@/lib/use-reduced-motion";
 
 export const ContainerScroll = ({
   titleComponent,
@@ -13,6 +14,7 @@ export const ContainerScroll = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const [isMobile, setIsMobile] = React.useState(false);
+  const reducedMotion = useReducedMotionPreference();
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -21,9 +23,9 @@ export const ContainerScroll = ({
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const rotate = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [16, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [1.045, 1]);
-  const translate = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, -90]);
+  const rotate = useTransform(scrollYProgress, [0, 1], isMobile || reducedMotion ? [0, 0] : [16, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], isMobile || reducedMotion ? [1, 1] : [1.045, 1]);
+  const translate = useTransform(scrollYProgress, [0, 1], isMobile || reducedMotion ? [0, 0] : [0, -90]);
 
   return (
     <div className="relative flex h-auto items-center justify-center px-5 py-16 md:h-[72rem] md:px-16 md:py-0" ref={containerRef}>
