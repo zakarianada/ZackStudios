@@ -8,6 +8,7 @@ A full-stack portfolio built with **Next.js 16, React 19, TypeScript, Tailwind C
 - Original portrait hero, floating work cards and Edit / Design / Amplify positioning.
 - Original category navigation and layout: videos first, Graphic Design & AI second, then Web Design.
 - Motion/video section with the requested 3D scroll animation.
+- AI ADS collection within Video Editing & Motion: 16 titled Drive videos with footage-derived thumbnails, measured runtimes and in-site playback at `/#ai-ads`.
 - Current Google Drive showreels are embedded in-site; there are no outbound Drive buttons.
 - Graphic Design + AI merged into one filterable archive with these categories:
   1. Social-media campaign

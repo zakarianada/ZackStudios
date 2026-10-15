@@ -5,7 +5,7 @@ import { ExternalLink, LoaderCircle, Maximize2, Pause, Play, Volume2, VolumeX, X
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
-import { drivePreviewUrl, motionProjects, type MotionProject } from "@/lib/motion";
+import { aiAdProjects, drivePreviewUrl, motionProjects, type MotionProject } from "@/lib/motion";
 import { useDialog } from "@/lib/use-dialog";
 
 function VideoFrame({ project, className = "" }: { project: MotionProject; className?: string }) {
@@ -189,6 +189,27 @@ function FeaturedVideo() {
   );
 }
 
+function VideoCard({ project, number, onSelect }: { project: MotionProject; number: number; onSelect: (project: MotionProject) => void }) {
+  return (
+    <button onClick={() => onSelect(project)} className="group relative overflow-hidden rounded-xl border border-white/10 bg-[#0d0d0e] p-0 text-left transition hover:border-[#ff3439]/55" aria-label={`Play ${project.title}`}>
+      <div className="relative aspect-video overflow-hidden bg-[radial-gradient(circle_at_50%_50%,rgba(255,38,44,.18),transparent_46%),#080808]">
+        <Image src={project.thumbnail} alt={`${project.title} video thumbnail`} fill className="object-cover transition duration-500 group-hover:scale-[1.04]" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-black/10" />
+        <div className="site-grid absolute inset-0 opacity-20" />
+        <div className="absolute inset-0 grid place-items-center">
+          <span className="grid size-14 place-items-center rounded-full border border-white/15 bg-black/65 transition group-hover:scale-110 group-hover:border-[#ff3439]/70 group-hover:bg-[#ff262c]"><Play className="ml-1 size-5 fill-current" /></span>
+        </div>
+        <span className="absolute left-4 top-4 text-[10px] font-semibold tracking-[.2em] text-white/44">{String(number).padStart(2, "0")}</span>
+        <span className="absolute bottom-4 right-4 text-[10px] tracking-[.14em] text-white/48">{project.duration}</span>
+      </div>
+      <div className="flex items-end justify-between gap-3 p-4">
+        <div><p className="text-[10px] uppercase tracking-[.16em] text-[#ff3439]">{project.type}</p><h3 className="mt-1 text-base font-semibold">{project.title}</h3></div>
+        <span className="shrink-0 text-xs text-white/36">Play ↗</span>
+      </div>
+    </button>
+  );
+}
+
 export function MotionShowcase() {
   const [active, setActive] = useState<MotionProject | null>(null);
   const [widePlayer, setWidePlayer] = useState(false);
@@ -213,7 +234,7 @@ export function MotionShowcase() {
           <div className="relative z-10 px-5">
             <p className="text-[10px] font-semibold uppercase tracking-[.22em] text-[#ff3439]">01 / Video Editing &amp; Motion</p>
             <h2 className="display-font mt-4 text-[clamp(3rem,16vw,3.8rem)] font-black uppercase leading-[.84] sm:text-[clamp(3.8rem,8vw,7.2rem)]">Cut for <span className="text-[#ff3439]">impact.</span></h2>
-            <p className="mx-auto mt-5 max-w-xl text-sm leading-6 text-white/52">Showreels, commercial edits, social campaigns, lifestyle, travel and property films — paced to hold attention and built for the screen they live on.</p>
+            <p className="mx-auto mt-5 max-w-xl text-sm leading-6 text-white/52">Showreels, AI ads, commercial edits, social campaigns, lifestyle, travel and property films — paced to hold attention and built for the screen they live on.</p>
           </div>
         }
       >
@@ -223,23 +244,24 @@ export function MotionShowcase() {
       <div className="relative z-10 mx-auto mt-12 max-w-[1500px] px-5 pb-20 md:-mt-32 md:px-9 md:pb-24">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {motionProjects.slice(1).map((project, index) => (
-            <button key={project.id} onClick={() => setActive(project)} className="group relative overflow-hidden rounded-xl border border-white/10 bg-[#0d0d0e] p-0 text-left transition hover:border-[#ff3439]/55" aria-label={`Play ${project.title}`}>
-              <div className="relative aspect-video overflow-hidden bg-[radial-gradient(circle_at_50%_50%,rgba(255,38,44,.18),transparent_46%),#080808]">
-                <Image src={project.thumbnail} alt={`${project.title} video thumbnail`} fill className="object-cover transition duration-500 group-hover:scale-[1.04]" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-black/10" />
-                <div className="site-grid absolute inset-0 opacity-20" />
-                <div className="absolute inset-0 grid place-items-center">
-                  <span className="grid size-14 place-items-center rounded-full border border-white/15 bg-black/65 transition group-hover:scale-110 group-hover:border-[#ff3439]/70 group-hover:bg-[#ff262c]"><Play className="ml-1 size-5 fill-current" /></span>
-                </div>
-                <span className="absolute left-4 top-4 text-[10px] font-semibold tracking-[.2em] text-white/44">{String(index + 2).padStart(2, "0")}</span>
-                <span className="absolute bottom-4 right-4 text-[10px] tracking-[.14em] text-white/48">{project.duration}</span>
-              </div>
-              <div className="flex items-end justify-between gap-3 p-4">
-                <div><p className="text-[10px] uppercase tracking-[.16em] text-[#ff3439]">{project.type}</p><h3 className="mt-1 text-base font-semibold">{project.title}</h3></div>
-                <span className="text-xs text-white/36">Play ↗</span>
-              </div>
-            </button>
+            <VideoCard key={project.id} project={project} number={index + 2} onSelect={setActive} />
           ))}
+        </div>
+
+        <div id="ai-ads" aria-labelledby="ai-ads-heading" className="mt-16 scroll-mt-24 border-t border-white/10 pt-10 md:mt-20 md:pt-12">
+          <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[.22em] text-[#ff3439]">AI-powered campaigns</p>
+              <h3 id="ai-ads-heading" className="display-font mt-3 text-4xl font-black uppercase leading-none sm:text-5xl">AI ADS</h3>
+              <p className="mt-4 max-w-xl text-sm leading-6 text-white/52">Brand stories, product spots and spokesperson ads brought to life with AI, creative direction and motion.</p>
+            </div>
+            <span className="text-[10px] font-semibold uppercase tracking-[.18em] text-white/40">{aiAdProjects.length} films / Select to play</span>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {aiAdProjects.map((project, index) => (
+              <VideoCard key={project.id} project={project} number={index + 1} onSelect={setActive} />
+            ))}
+          </div>
         </div>
       </div>
 
