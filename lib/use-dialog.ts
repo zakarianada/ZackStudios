@@ -15,7 +15,7 @@ export function useDialog(open: boolean, onClose: () => void) {
     document.body.style.overflow = "hidden";
     const focusable = () => Array.from(dialogRef.current?.querySelectorAll<HTMLElement>(
       'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), iframe, [tabindex="0"]',
-    ) || []).filter((element) => element.getClientRects().length > 0);
+    ) || []).filter((element) => !element.closest("[inert]") && getComputedStyle(element).visibility !== "hidden" && element.getClientRects().length > 0);
     const focusTimer = window.setTimeout(() => focusable()[0]?.focus(), 0);
 
     const keydown = (event: KeyboardEvent) => {

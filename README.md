@@ -28,8 +28,9 @@ A full-stack portfolio built with **Next.js 16, React 19, TypeScript, Tailwind C
 - AYOUR, NAFAS Casablanca and Punch Morocco website demos in keyboard-operable floating previews, with a separate popup-window action.
 - Scroll-reactive client-review section with sticky storytelling, card reveals and reduced-motion support; hidden until genuine client feedback is supplied in `lib/testimonials.ts`.
 - Reduced-motion support, off-screen video pausing, dialog focus handling and small-screen layouts tested at 320–430px.
-- Mobile-native showreel controls with a 480p fast-start source, byte-range seeking and no automatic mobile playback.
-- Full-height mobile video modals with persistent close, external-player and landscape/fullscreen controls.
+- Mobile video controls hide after two seconds of playback; tapping reveals them and restarts the timer. Paused, buffering and keyboard-operated controls stay visible.
+- Fast-start H.264/AAC mobile versions for all 25 video cards, with byte-range seeking and no automatic mobile playback.
+- Full-height mobile video modals with close and landscape/fullscreen controls available on tap.
 - Custom right-click contact menu showing `zfiverrpro@gmail.com`.
 - Full-stack contact API route with server-side Resend support and mailto fallback.
 - Responsive desktop, tablet and mobile layouts.
@@ -73,11 +74,11 @@ CONTACT_FROM_EMAIL=Zack Portfolio <portfolio@yourdomain.com>
 
 ## Google Drive videos
 
-The site uses Google Drive's `/preview` player inside sandboxed iframes. Make sure the video files are shared so portfolio visitors can view them.
+Desktop uses Google Drive's `/preview` player inside iframes. Make sure the video files are shared so portfolio visitors can view them. Mobile uses optimized H.264/AAC copies in `public/media/mobile/` so the interface can hide two seconds after playback starts and wake on tap. Playback, seek, sound, fullscreen and close controls share the same timer; pausing or buffering reveals the interface. Files load only when their card is opened.
 
 The UI does **not** expose a normal `Open in Drive` link. As with any browser-delivered media, this is a deterrent rather than DRM.
 
-The featured self-hosted showreel uses `public/media/zack-showreel-mobile.mp4` below 768px. It retains the desktop master for larger screens, while the mobile encode is H.264/AAC at 854×480 with its MP4 metadata at the beginning for faster startup and seeking. Mobile browsers receive their native controls and playback begins only after a visitor presses play.
+The featured self-hosted showreel uses `public/media/zack-showreel-mobile.mp4` on mobile. It retains the desktop master for larger screens, while the mobile encode is H.264/AAC at 854×480 with its MP4 metadata at the beginning for faster startup and seeking. It uses the same auto-hiding controls as the mobile video cards, and playback begins only after a visitor presses play.
 
 ## Right-click behavior
 
